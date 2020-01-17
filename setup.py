@@ -1,7 +1,8 @@
 import os
 from distutils.core import setup
 from setuptools import dist
-dist.Distribution().fetch_build_eggs(['Cython', 'numpy'])
+dist.Distribution().fetch_build_eggs(['Cython==0.29.14', 'numpy==1.17.3'])
+
 
 from distutils.extension import Extension
 from Cython.Distutils import build_ext

@@ -4,19 +4,27 @@ from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
 
-class CustomBuildExtCommand(build_ext):
-    """build_ext command for use when numpy headers are needed."""
-    def run(self):
-
-        # Import numpy here, only when headers are needed
+    
+def set_builtin(name, value):
+      if isinstance(__builtins__, dict):
+    __builtins__[name] = value
+  else:
+    setattr(__builtins__, name, value)
+    
+class build_ext_pypoisson(build_ext):
+    
+    def finalize_options(self):
+        build_ext.finalize_options(self)
+        # Prevent numpy from thinking it is still in its setup process:
+        set_builtin('__NUMPY_SETUP__', False)
         import numpy
 
-        # Add numpy headers to include_dirs
         self.include_dirs.append(numpy.get_include())
-
+    
+    def run(self):
+    
         # Call original build_ext command
         build_ext.run(self)
-    
 
 
 sources = ["src/pypoisson.pyx"]
@@ -40,6 +48,6 @@ setup(
     url='https://github.com/mmolero/pypoisson',
     setup_requires=['numpy','cython'],
     install_requires=['numpy'],
-    cmdclass = {'build_ext': CustomBuildExtCommand},
+    cmdclass = {'build_ext': build_ext_pypoisson},
     ext_modules = exts
 )

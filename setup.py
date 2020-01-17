@@ -2,7 +2,10 @@ import os
 from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
+
+set_builtin('__NUMPY_SETUP__', False)
 import numpy
+
 
 sources = ["src/pypoisson.pyx"]
 path = "src/PoissonRecon_v6_13/src/"

@@ -2,8 +2,8 @@ import os
 from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
-
-
+from setuptools import dist
+dist.Distribution().fetch_build_eggs(['Cython', 'numpy'])
     
 def set_builtin(name, value):
     if isinstance(__builtins__, dict):

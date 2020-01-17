@@ -38,7 +38,7 @@ setup(
     author='Miguel Molero-Armenta',
     author_email='miguel.molero@gmail.com',
     url='https://github.com/mmolero/pypoisson',
-    setup_requires=['numpy'],
+    setup_requires=['numpy','cython'],
     install_requires=['numpy'],
     cmdclass = {'build_ext': CustomBuildExtCommand},
     ext_modules = exts

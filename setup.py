@@ -6,10 +6,10 @@ from Cython.Distutils import build_ext
 
     
 def set_builtin(name, value):
-      if isinstance(__builtins__, dict):
-    __builtins__[name] = value
-  else:
-    setattr(__builtins__, name, value)
+    if isinstance(__builtins__, dict):
+        __builtins__[name] = value
+    else:
+        setattr(__builtins__, name, value)
     
 class build_ext_pypoisson(build_ext):
     
